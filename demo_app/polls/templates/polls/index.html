@@ -1,0 +1,28 @@
+{% extends "polls/base.html" %}
+{% block content %}
+<div class="d-flex justify-content-center mt-3">
+    <a class="btn btn-lg btn-outline-primary mb-2" href="{% url 'create_todo' %}">Add ToDo</a>
+</div>
+{% if todos %}
+<div class="d-flex justify-content-center mt-3">
+    <div class="list-group" style="width: 30rem;">
+        {% for todo in todos %}
+        <a href="{% url 'details_todo' todo.id %}" class="list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1 text-primary">{{ todo.text }}</h5>
+            </div>
+            <p class="mb-1">{{ todo.create_at }}</p>
+            {% if todo.is_finished == True %}
+            <span class="badge text-bg-primary">{{ todo.is_finished }}</span>
+            {% else %}
+            <span class="badge text-bg-danger">{{ todo.is_finished }}</span>
+            {% endif %}
+        </a>
+        {% endfor %}
+        {% else %}
+        <p>No todos are available.</p>
+        {% endif %}
+        {% endblock content %}
+    </div>
+</div>
+
